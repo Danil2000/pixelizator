@@ -2,20 +2,15 @@ package world.ucode;
 
 import world.ucode.module.Pixelate;
 
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 
 
 @MultipartConfig
@@ -24,8 +19,10 @@ public class Pixel extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Part filePart = req.getPart("file");
         Pixelate pixels = new Pixelate();
+        int pixSize = inputStreamToInt(req.getPart("size").getInputStream());
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        InputStream fileContent = pixels.toPixel(filePart.getInputStream());
+        InputStream fileContent = pixels.toPixel(filePart.getInputStream(), pixSize);
+                
         if (fileContent != null) {
             OutputStream out = resp.getOutputStream();
             byte[] buffer = new byte[2400];
@@ -37,7 +34,34 @@ public class Pixel extends HttpServlet {
         else {
             resp.getWriter().println("Bad image");
         }
-        System.out.println("Hey");
+    }
+    private static int inputStreamToInt(InputStream is) {
+        return Integer.parseInt(inputStreamToString(is));
+    }
+    private static String inputStreamToString(InputStream is) {
+        BufferedReader br = null;
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        try {
+            br = new BufferedReader(new InputStreamReader(is));
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return sb.toString();
     }
 
     @Override

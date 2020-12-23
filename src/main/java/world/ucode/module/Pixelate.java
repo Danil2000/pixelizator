@@ -2,30 +2,31 @@ package world.ucode.module;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 public class Pixelate {
-    public InputStream toPixel(InputStream in) throws IOException {
-        BufferedImage image = ImageIO.read(in);
+    public BufferedImage image;
+    public InputStream toPixel(InputStream in, int size) throws IOException {
+        image = ImageIO.read(in);
         int height = image.getHeight();
         int width = image.getWidth();
         BufferedImage imageRes = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        int sizeOfPixel = 900;
-
-        for (int i = 0; i < width; i += sizeOfPixel) {
-            for (int j = 0; j < height; j += sizeOfPixel) {
-                int pixel = makePicture(image, i, j, sizeOfPixel);
-                for (int dw = i; (dw < i + sizeOfPixel) && (dw < imageRes.getWidth()); dw++)
-                    for (int dh = j; (dh < j + sizeOfPixel) && (dh < imageRes.getHeight()); dh++)
+//        System.out.println(size);
+        for (int i = 0; i < width; i += size) {
+            for (int j = 0; j < height; j += size) {
+                int pixel = makePicture(image, i, j, size);
+                for (int dw = i; (dw < i + size) && (dw < imageRes.getWidth()); dw++)
+                    for (int dh = j; (dh < j + size) && (dh < imageRes.getHeight()); dh++)
                         imageRes.setRGB(dw, dh, pixel);
             }
         }
+//        toFile(imageRes);
         return toStream(imageRes);
     }
+//    private void toFile(BufferedImage img) throws IOException {
+//        File newFile = new File("src/main/webapp/img.jpg");
+//        ImageIO.write(img, "jpg", newFile);
+//    }
 
     private InputStream toStream(BufferedImage imageRes) throws IOException {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -34,10 +35,9 @@ public class Pixelate {
     }
 
     private int makePicture(BufferedImage image, int i, int j, int sizeOfPixel) {
-        sizeOfPixel = ++sizeOfPixel/ 2;
+        sizeOfPixel = ++sizeOfPixel / 2;
         int wCenter = i + sizeOfPixel < image.getWidth() ? i + sizeOfPixel : i;
         int hCenter = j + sizeOfPixel < image.getHeight() ? j + sizeOfPixel : j;
         return image.getRGB(hCenter, wCenter);
     }
-
 }

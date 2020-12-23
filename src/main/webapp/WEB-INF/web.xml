@@ -7,12 +7,8 @@
         <servlet-name>Pixel</servlet-name>
         <servlet-class>world.ucode.Pixel</servlet-class>
     </servlet>
-    <jsp-config>
-
-    </jsp-config>
     <servlet-mapping>
         <servlet-name>Pixel</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/pixelizator</url-pattern>
     </servlet-mapping>
-
 </web-app>

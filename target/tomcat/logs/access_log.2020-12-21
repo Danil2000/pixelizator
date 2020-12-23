@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1 - - [21/Dec/2020:21:25:23 +0200] "GET /pixelizator HTTP/1.1" 302 - http-bio-8070-exec-1 0
+0:0:0:0:0:0:0:1 - - [21/Dec/2020:21:25:24 +0200] "GET /pixelizator/ HTTP/1.1" 200 1013 http-bio-8070-exec-3 926
+0:0:0:0:0:0:0:1 - - [21/Dec/2020:21:25:24 +0200] "GET /pixelizator/js/form.js HTTP/1.1" 200 2027 http-bio-8070-exec-4 3
+0:0:0:0:0:0:0:1 - - [21/Dec/2020:21:25:24 +0200] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8070-exec-5 0
+0:0:0:0:0:0:0:1 - - [21/Dec/2020:21:26:40 +0200] "GET /pixelizator/ HTTP/1.1" 200 1013 http-bio-8070-exec-1 37
