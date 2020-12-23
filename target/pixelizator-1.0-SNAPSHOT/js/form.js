@@ -25,9 +25,7 @@ function send() {
         }).catch(console.error);
 }
 
-window.onload = function () {
 
-}
 function getParametr() {
     let sizeElement = document.getElementById("size");
     let sizePicture = document.getElementById("sizePicture");

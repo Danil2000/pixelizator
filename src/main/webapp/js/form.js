@@ -9,7 +9,7 @@ function send() {
     formData.append("file", img);
     formData.append("size", pixSize);
     // formData.append("pixSize", pixSize);
-    fetch("http://localhost:8070/pixelizator", {
+    fetch("http://localhost:8080/pixelizator_war/pixelizator", {
         method: 'POST',
         body: formData
     }).then(r => r.arrayBuffer())
@@ -25,9 +25,7 @@ function send() {
         }).catch(console.error);
 }
 
-window.onload = function () {
 
-}
 function getParametr() {
     let sizeElement = document.getElementById("size");
     let sizePicture = document.getElementById("sizePicture");
