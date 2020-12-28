@@ -20,7 +20,6 @@ public class Pixel extends HttpServlet {
         Part filePart = req.getPart("file");
         Pixelate pixels = new Pixelate();
         int pixSize = inputStreamToInt(req.getPart("size").getInputStream());
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         InputStream fileContent = pixels.toPixel(filePart.getInputStream(), pixSize);
                 
         if (fileContent != null) {

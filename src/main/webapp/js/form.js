@@ -9,7 +9,7 @@ function send() {
     formData.append("file", img);
     formData.append("size", pixSize);
     // formData.append("pixSize", pixSize);
-    fetch("http://localhost:8080/pixelizator_war/pixelizator", {
+    fetch("http://localhost:8080/pixelizator/pixelizator", {
         method: 'POST',
         body: formData
     }).then(r => r.arrayBuffer())
@@ -25,7 +25,6 @@ function send() {
         }).catch(console.error);
 }
 
-
 function getParametr() {
     let sizeElement = document.getElementById("size");
     let sizePicture = document.getElementById("sizePicture");
@@ -38,9 +37,8 @@ function getParametr() {
         size = Math.floor(totalBytes / 1000000) + 'MB';
     sizeElement.innerText = 'Size of file: ' + size;
     sizePicture.innerText = 'Size of picture: ' + height + 'x' +  width;
-    height = 0;
-    width = 0;
 }
+
 
 function download() {
     let src = document.getElementById("imgAltered").getAttribute("src");
@@ -49,8 +47,7 @@ function download() {
 
     divImage.style.display = "block";
     jpeg.setAttribute("href", src);
-    console.log(src);
 }
 function setLblValue() {
-    document.getElementById('lblValue').innerHTML = 'x' + (+document.getElementById('volume').value);
+    document.getElementById('lblValue').innerHTML = 'x' + (document.getElementById('volume').value);
 }

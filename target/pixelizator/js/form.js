@@ -9,7 +9,7 @@ function send() {
     formData.append("file", img);
     formData.append("size", pixSize);
     // formData.append("pixSize", pixSize);
-    fetch("http://localhost:8080/pixelizator_war/pixelizator", {
+    fetch("http://localhost:8080/pixelizator/pixelizator", {
         method: 'POST',
         body: formData
     }).then(r => r.arrayBuffer())
@@ -24,7 +24,6 @@ function send() {
             download();
         }).catch(console.error);
 }
-
 
 function getParametr() {
     let sizeElement = document.getElementById("size");
@@ -42,6 +41,7 @@ function getParametr() {
     width = 0;
 }
 
+
 function download() {
     let src = document.getElementById("imgAltered").getAttribute("src");
     let divImage = document.getElementById("download");
@@ -52,5 +52,5 @@ function download() {
     console.log(src);
 }
 function setLblValue() {
-    document.getElementById('lblValue').innerHTML = 'x' + (+document.getElementById('volume').value);
+    document.getElementById('lblValue').innerHTML = 'x' + (document.getElementById('volume').value);
 }

@@ -24,9 +24,8 @@
         <label id="sizePicture"> </label>
     </div>
 
-    ls<div id = "download">
+    <div id = "download">
         <a id="linkDownload" href="" download="pixel.jpeg">.jpeg</a>
-<%--        <a id="linkDownloadimg" href="" download="pixel.img">.img</a>--%>
     </div>
 </body>
 </html>
